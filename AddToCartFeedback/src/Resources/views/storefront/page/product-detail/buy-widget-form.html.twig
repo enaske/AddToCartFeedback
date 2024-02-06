@@ -1,0 +1,28 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+
+
+
+ {% block page_product_detail_buy_button_container %}
+     <script>
+         window.customText = {
+             adding: '{{ 'add-to-cart-feedback.btn-text'|trans|e('js') }}',
+             default: '{{ 'detail.addProduct'|trans|e('js') }}',
+         };
+     </script>
+
+     <div class="{% if showQuantitySelect %}col-8{% else %}col-12{% endif %}">
+         {% block page_product_detail_buy_button %}
+             <div class="d-grid">
+
+                 <button class="btn btn-primary btn-buy"
+                         data-feedback-plugin
+                         title="{{ "detail.addProduct"|trans|striptags }}"
+                         aria-label="{{ "detail.addProduct"|trans|striptags }}">
+
+                     {{  "detail.addProduct"|trans|sw_sanitize }}
+
+                 </button>
+             </div>
+         {% endblock %}
+     </div>
+ {% endblock %}

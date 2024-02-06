@@ -1,0 +1,62 @@
+{
+  "name": "Add to Cart Feedback",
+  "author": "Shopware AG",
+  "style": [
+    "@Storefront",
+    "app/storefront/src/scss/base.scss"
+  ],
+  "script": [
+    "@Storefront",
+    "app/storefront/dist/storefront/js/add-to-cart-feedback.js"
+  ],
+  "asset": [
+    "app/storefront/src/assets"
+  ],
+  "config": {
+    "blocks": {
+      "settings": {
+        "label" : {
+          "en-GB" : "Plugin Settings",
+          "de-DE" : "Plugin Einstellungen",
+          "en-US": "Plugin Settings"
+        }
+      }
+    },
+    "sections" : {
+      "feedback_colors": {
+        "label": {
+          "en_GB": "Feedback Colors",
+          "de-DE" : "Feedback Farben"
+        }
+      },
+      "feedback_text": {
+        "label": {
+          "en_GB": "Feedback Text",
+          "de-DE" : "Feedback Text"
+        }
+      }
+    },
+    "fields": {
+      "atcf-btn-background": {
+        "label" : {
+          "en-GB": "Button Feedback Color",
+          "de-DE" : "Button Feedback Farbe"
+        },
+        "value": "#798490",
+        "block" : "settings",
+        "type": "color",
+        "section" : "feedback_colors"
+      },
+      "atcf-font-color": {
+        "label" : {
+          "en-GB": "Button Feedback Font Color",
+          "de-DE" : "Button Feedback Schrift Farbe"
+        },
+        "value": "#FFFFFF",
+        "block" : "settings",
+        "type": "color",
+        "section" : "feedback_colors"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.btn-buy.disabled, .btn-buy:disabled{
+  background: $atcf-btn-background;
+}
+
+
+input.btn-outline-feedback,
+button.btn-outline-feedback.btn-plus,
+button.btn-outline-feedback.btn-minus {
+  /* Additional styles specific to button with both classes */
+  border: 1.5px solid $sw-color-brand-primary;
+  color: $sw-color-brand-primary;
+}
+button.btn-buy.btn-font-color-feedback {
+  color: $atcf-font-color;
+}
+.icon-plus, .icon-minus {
+  .svg-color-feedback {
+    fill: $sw-color-brand-primary;
+  }
+}
