@@ -1,6 +1,6 @@
 {
-  "name": "swag/theme-skeleton",
-  "description": "Theme skeleton plugin",
+  "name": "sbx/add-to-cart-feedback",
+  "description": "Adds Feedback to the Button and Quantity if the Users adds something into the Cart",
   "type": "shopware-platform-plugin",
   "license": "MIT",
   "autoload": {
@@ -11,8 +11,8 @@
   "extra": {
     "shopware-plugin-class": "AddToCartFeedback\\AddToCartFeedback",
     "label": {
-      "de-DE": "Theme AddToCartFeedback plugin",
-      "en-GB": "Theme AddToCartFeedback plugin"
+      "de-DE": "Add to Cart Feedback Plugin for Details Page",
+      "en-GB": "Warenkorb Feedback Plugin für die Detail Ansicht"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "Add to Cart Feedback",
-  "author": "Shopware AG",
+  "author": "Robert",
   "style": [
     "@Storefront",
     "app/storefront/src/scss/base.scss"
