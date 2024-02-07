@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.shopware.com/schema/config/config.xsd">
+    <acl>
+        <privileges>
+            <privilege name="faq:create" dependencies="[]"/>
+            <!-- Add any other privileges your plugin requires -->
+        </privileges>
+    </acl>
+</config>
