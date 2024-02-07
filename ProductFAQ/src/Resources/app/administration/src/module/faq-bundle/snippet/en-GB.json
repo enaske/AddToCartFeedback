@@ -1,0 +1,9 @@
+{
+  "faq-bundle": {
+    "general" : {
+      "mainMenuItemGeneral": "FAQs",
+      "descriptionTextModule" : "Verwalung von Häufig gestellte Fragen und Antworten"
+    }
+  }
+}
+
