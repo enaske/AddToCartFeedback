@@ -1,0 +1,17 @@
+{
+  "product-faq": {
+    "modal": {
+      "btn-modal-close": "Schließen",
+      "btn-modal-submit": "Frage stellen",
+      "submit-success": "Frage wurde erfolgreich gestellt!",
+      "submit-error-backend": "Ein Server-Fehler ist aufgetreten! Bitte versuche es später erneut!",
+      "submit-error-empty": "Das Frage-Feld darf nicht leer bleiben, bitte stelle deine Frage."
+    },
+    "faq": {
+      "btn-ask-question" : "Neue Frage stellen",
+      "txt-your-question" : "Deine Frage:",
+      "txt-your-question-ph" : "Gib deine Frage ein"
+    }
+  }
+}
+

@@ -3,6 +3,7 @@
 namespace ProductFAQ\Core\Content\ProductFAQ;
 
 use Shopware\Core\Content\Product\ProductCollection;
+use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 
@@ -28,9 +29,9 @@ class ProductFAQEntity extends Entity
      */
     protected int $orderPosition;
     /**
-     * @var ProductCollection
+     * @var ProductEntity
      */
-   protected ProductCollection $products;
+   protected ProductEntity $productId;
 
 
     public function getOrderPosition(): int
@@ -47,6 +48,7 @@ class ProductFAQEntity extends Entity
     {
         return $this->answer;
     }
+
 
     public function setAnswer(?string $answer): void
     {
@@ -73,14 +75,14 @@ class ProductFAQEntity extends Entity
         $this->active = $active;
     }
 
-    public function getProducts(): ProductCollection
+    public function getProduct(): ProductEntity
     {
-        return $this->products;
+        return $this->productId;
     }
 
-    public function setProducts(ProductCollection $products): void
+    public function setProduct(ProductEntity $productId): void
     {
-        $this->products = $products;
+        $this->productId = $productId;
     }
 
 }

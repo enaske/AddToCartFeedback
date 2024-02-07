@@ -5,18 +5,39 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="ProductFAQ\Core\Content\FAQ\FAQDefinition">
-            <tag name="shopware.entity.definition" entity="faq_product"/>
-        </service>
+
         <service id="ProductFAQ\Core\Content\ProductFAQ\ProductFAQDefinition">
             <tag name="shopware.entity.definition" entity="product_faq"/>
         </service>
-        <service id="ProductFAQ\Storefront\Subscriber\ProductDetailSubscriber" public="true">
+
+        <service id="ProductFAQ\Storefront\Subscriber\ProductDetailSubscriber">
             <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service"/>
-            <argument id="product_faq.repository" type="service"/>
-            <argument type="service" id="request_stack" />
+            <argument id="faq.repository" type="service"/>
             <tag name="kernel.event_subscriber"/>
         </service>
+            <service id="ProductFAQ\Core\Api\ProductFAQApiController" public="true">
+            <argument id="faq.repository" type="service"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            </service>
+        <service id="ProductFAQ\Service\FAQRoleCreator" public="true">
+            <argument type="service" id="acl_role.repository" />
+            <argument type="service" id="integration.repository" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
 
+        </service>
+
+        <service id="ProductFAQ\Command\ActivateCommand">
+            <tag name="console.command" />
+            <argument type="service" id="ProductFAQ\Service\FAQRoleCreator"/>
+        </service>
+
+        <service id="ProductFAQ\Command\HelloWorldCommand">
+            <tag name="console.command" />
+        </service>
     </services>
 </container>
+
+
+

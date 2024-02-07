@@ -1,16 +1,15 @@
 <?php declare(strict_types=1);
 
 namespace ProductFAQ\Core\Content\ProductFAQ;
-
-use ProductFAQ\Core\Content\FAQ\FAQDefinition;
 use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IntField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToManyAssociationField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 
@@ -19,7 +18,7 @@ class ProductFAQDefinition extends EntityDefinition
 {
     public function getEntityName(): string
     {
-        return 'product_faq';
+        return 'faq';
     }
 
     public function getCollectionClass(): string
@@ -40,7 +39,10 @@ class ProductFAQDefinition extends EntityDefinition
                 new BoolField('active','active'),
                 (new StringField('question', 'question'))->addFlags(new Required()),
                 new StringField('answer', 'answer'),
-                new IntField('order_position', 'orderPosition')
+                new IntField('order_position', 'orderPosition'),
+                (new FkField('product_id', 'product_id', ProductDefinition::class))->addFlags(new Required()),
+                new ManyToOneAssociationField('productId', 'product_id', ProductDefinition::class, 'id', false),
+
             ]
         );
     }

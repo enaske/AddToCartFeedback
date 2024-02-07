@@ -1,0 +1,123 @@
+
+<button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#askQuestionModal">
+    {{  'product-faq.faq.btn-ask-question'|trans}}
+</button>
+
+<div class="accordion" id="faqAccordion">
+    {% for faqObj in product_faq.elements %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ loop.index }}">
+                <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="{{ loop.first ? 'true' : 'false' }}" aria-controls="collapse{{ loop.index }}">
+                    {{ faqObj.question }}
+                </button>
+            </h2>
+            <div id="collapse{{ loop.index }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    {{ faqObj.answer }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<!-- Modal structure -->
+<div class="modal" id="askQuestionModal" tabindex="-1" aria-labelledby="askQuestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="askQuestionModalLabel">Ask a New Question</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="newQuestionInput" class="form-label">Your Question:</label>
+                    <input type="text" class="form-control" id="newQuestionInput" placeholder="Enter your question">
+                </div>
+                <div id="feedbackBanner" class="mt-3"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" role="button" class="btn btn-secondary" data-bs-dismiss="modal">{{  'product-faq.modal.btn-modal-close'|trans}}</button>
+                <button id="btn-submit-form" role="button" class="btn btn-primary" onclick="submitQuestion()">{{  'product-faq.modal.btn-modal-submit'|trans}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    // JavaScript function to handle the form submission (you can adjust this according to your needs)
+    async function submitQuestion() {
+        // Get the value from the input field
+        let btnSubmit = document.getElementById('btn-submit-form');
+        let newQuestion = document.getElementById('newQuestionInput').value;
+        let apiKey = "{{ config('ProductFAQ.config.apiKEY') }}";
+        let apiSecret = "{{ config('ProductFAQ.config.apiSECRET') }}";
+        let productData = {{ page|json_encode|raw }};
+        let productId = productData.product._uniqueIdentifier;
+
+        if (newQuestion.trim() === '') {
+            showBanner('danger', '{{  'product-faq.modal.submit-error-empty'|trans}}');
+            return
+        }
+        btnSubmit.setAttribute('aria-disabled', 'true');
+        btnSubmit.classList.add('disabled');
+
+
+        const tokenResponse = await fetch('/api/oauth/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                client_id: apiKey,
+                client_secret: apiSecret,
+                grant_type: 'client_credentials',
+            }),
+        });
+        const tokenData = await tokenResponse.json();
+        const accessToken = tokenData.access_token;
+        // Fetch request to create a new question using the obtained access token
+
+
+        const response = await fetch('{{ path('api.action.product_faq.create', { 'version': 1 }) }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + accessToken,
+            },
+            body: JSON.stringify({
+                question: newQuestion,
+                product_id: productId,
+            }),
+        });
+        if (response.ok) {
+            // Show success banner
+            showBanner('success', '{{  'product-faq.modal.submit-success'|trans}}');
+
+        } else {
+            // Show error banner
+            showBanner('danger', '{{  'product-faq.modal.submit-error-backend'|trans}}');
+        }
+        function showBanner(type, message) {
+            // Get the banner element
+            const banner = document.getElementById('feedbackBanner');
+            // Update the banner content
+            banner.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            // Remove the banner after a few seconds (adjust as needed)
+            setTimeout(() => {
+                banner.innerHTML = '';
+                if (type === 'success'){
+                    btnSubmit.removeAttribute('aria-disabled');
+                    btnSubmit.classList.remove('disabled');
+                }
+
+            }, 3000);
+        }
+
+
+        // Close the modal
+
+    }
+</script>

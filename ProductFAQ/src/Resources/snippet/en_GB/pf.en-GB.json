@@ -1,0 +1,16 @@
+{
+  "product-faq": {
+    "modal": {
+      "btn-modal-close": "Close",
+      "btn-modal-submit": "Ask question",
+      "submit-success": "Question has been submitted successfully",
+      "submit-error-backend": "Some Backend Error occurred, please try again later.",
+      "submit-error-empty": "Question field can't be empty. Please enter your question!"
+    },
+    "faq": {
+      "btn-ask-question" : "Ask a new Question",
+      "txt-your-question" : "Your Question:",
+      "txt-your-question-ph" : "Enter your question"
+    }
+  }
+}
