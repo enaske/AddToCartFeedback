@@ -1,0 +1,27 @@
+{
+    "name": "product-f-a-q/product-f-a-q",
+    "description": "Skeleton plugin",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "shopware/core": "6.5.*"
+    },
+    "extra": {
+        "shopware-plugin-class": "ProductFAQ\\ProductFAQ",
+        "label": {
+            "de-DE": "Skeleton plugin",
+            "en-GB": "Skeleton plugin"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ProductFAQ\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ProductFAQ\\Tests\\": "tests/"
+        }
+    }
+}
