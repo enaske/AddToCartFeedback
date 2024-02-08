@@ -9,10 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-/**
- * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
- */
+
+
 #[Route(defaults: ['_routeScope' => ['api']])]
 class ProductFAQApiController extends AbstractController
 {
@@ -31,12 +29,14 @@ public function createFAQ(Request $request,Context $context): JsonResponse
 {
 $data = json_decode($request->getContent(), true);
 
+
+
 $newFAQ = [
 'id' => UUID::randomHex(),
 'active' => false,
 'question' => $data['question'],
 'orderPosition' => $data['order_position'] ?? 1,
-'product_id' => $data['product_id'], // retrieve product_id from the form
+'productId' => $data['product_id'],
 ];
 
 

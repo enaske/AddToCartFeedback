@@ -42,7 +42,7 @@ Component.register('faq-bundle-list', {
         createdComponent() {
             this.repository = this.repositoryFactory.create("faq");
             const criteria = new Criteria();
-            criteria.addAssociation('productId');
+            criteria.addAssociation('products_all');
             this.repository.search(criteria, Shopware.Context.api).then((result) => {
                this.bundles = result;
                console.dir(this.bundles)
@@ -51,7 +51,7 @@ Component.register('faq-bundle-list', {
         },
         search() {
             const criteria = new Criteria();
-            criteria.addAssociation('productId');
+            criteria.addAssociation('products_all');
             this.repository.search(criteria, Shopware.Context.api).then((result) => {
                 this.bundles = result;
             })

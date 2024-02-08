@@ -33,7 +33,7 @@ class ProductFAQEntity extends Entity
     /**
      * @var ProductEntity|null
      */
-    protected ?ProductEntity $productId = null;
+    protected ?ProductEntity $productId;
 
     public function getOrderPosition(): int
     {
@@ -75,13 +75,15 @@ class ProductFAQEntity extends Entity
         $this->active = $active;
     }
 
-    public function getProduct(): ?ProductEntity
+    public function getProductId(): ?ProductEntity
     {
         return $this->productId;
     }
 
-    public function setProduct(?ProductEntity $productId): void
+    public function setProductId(?ProductEntity $productId): void
     {
         $this->productId = $productId;
     }
+
+
 }
