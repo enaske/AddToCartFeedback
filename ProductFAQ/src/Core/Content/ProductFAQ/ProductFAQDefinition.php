@@ -40,7 +40,7 @@ class ProductFAQDefinition extends EntityDefinition
                 (new StringField('question', 'question'))->addFlags(new Required()),
                 new StringField('answer', 'answer'),
                 new IntField('order_position', 'orderPosition'),
-                (new FkField('product_id', 'product_id', ProductDefinition::class))->addFlags(new Required()),
+                (new FkField('product_id', 'productId', ProductDefinition::class))->addFlags(new Required()),
                 new ManyToOneAssociationField('productId', 'product_id', ProductDefinition::class, 'id', false),
 
             ]

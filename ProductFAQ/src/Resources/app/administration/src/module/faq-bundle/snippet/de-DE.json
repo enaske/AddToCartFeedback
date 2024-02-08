@@ -2,7 +2,15 @@
   "faq-bundle": {
     "general" : {
       "mainMenuItemGeneral": "FAQs",
-      "descriptionTextModule" : "Verwalung von Häufig gestellte Fragen und Antworten"
+      "descriptionTextModule" : "Verwalung von Häufig gestellte Fragen und Antworten",
+      "add-question" : "Neue Frage hinzufügen"
+    },
+    "columns": {
+      "question": "Frage",
+      "active" : "Aktiv?",
+      "answer" : "Antwort",
+      "product": "Produkt zur Frage"
     }
   }
 }
+

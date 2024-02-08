@@ -1,0 +1,35 @@
+
+
+{% block faq_bundle_list %}
+
+        <sw-page class="faq-bundle-list">
+            {% block faq_bundle_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+                <sw-button variant="primary" :routerLink="{name: 'swag.bundle.create'}">
+                    {{ $tc('faq-bundle.general.add-question') }}
+
+                </sw-button>
+            </template>
+            {% endblock %}
+            <template #content>
+            {% block faq_bundle_list_content %}
+                <sw-entity-listing
+                    v-if="bundles"
+                    :items="bundles"
+                    :repository:="repository"
+                    :showSelection="false"
+                    :columns="columns"
+                    :disable-data-fetching="true"
+                    @column-sort="onSave"
+                    @page-change="onSave"
+                    @inline-edit-save="onSave"
+                    @selection-change="onSave"
+                    @update-records="onSave"
+                    @bulk-edit-modal-open="onSave"
+                    detailRoute="faq.bundle.detail">
+                </sw-entity-listing>
+                {% endblock %}
+            </template>
+        </sw-page>
+
+{% endblock %}

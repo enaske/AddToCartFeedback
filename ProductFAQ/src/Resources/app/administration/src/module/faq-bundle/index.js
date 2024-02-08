@@ -1,7 +1,12 @@
+import './page/faq-bundle-list'
+
+
 import deDE from './snippet/en-GB.json'
 import enGB from './snippet/de-DE.json'
 
 console.log('index.js loaded')
+
+
 
 
 Shopware.Module.register('faq-bundle', {
@@ -18,14 +23,18 @@ Shopware.Module.register('faq-bundle', {
     },
 
     routes: {
-        a: {component: 'b'}
+        index: {
+            component: 'faq-bundle-list',
+            path: 'index'
+        }
     },
-
     navigation: [{
+        id: 'faq-bundle-main',
         label: 'faq-bundle.general.mainMenuItemGeneral',
-        color: '#ff3d58',
+        color: '#A092F0',
         path: 'faq.bundle.index',
-        icon: 'default-shopping-paper-bag-product',
-        position: 100
-    }]
+        icon: 'regular-shopping-bag',
+        parent: 'sw-catalogue',
+        position: 30
+    }],
 });

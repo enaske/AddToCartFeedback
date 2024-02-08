@@ -2,37 +2,38 @@
 
 namespace ProductFAQ\Core\Content\ProductFAQ;
 
-use Shopware\Core\Content\Product\ProductCollection;
 use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 
-
 class ProductFAQEntity extends Entity
 {
-
     use EntityIdTrait;
+
     /**
-     * @var boolean
+     * @var bool
      */
     protected bool $active;
+
     /**
      * @var string
      */
     protected string $question;
+
     /**
-     * @var string|null
+     * @var ?string
      */
-    protected string|null $answer;
+    protected ?string $answer = null;
+
     /**
      * @var int
      */
     protected int $orderPosition;
-    /**
-     * @var ProductEntity
-     */
-   protected ProductEntity $productId;
 
+    /**
+     * @var ProductEntity|null
+     */
+    protected ?ProductEntity $productId = null;
 
     public function getOrderPosition(): int
     {
@@ -48,7 +49,6 @@ class ProductFAQEntity extends Entity
     {
         return $this->answer;
     }
-
 
     public function setAnswer(?string $answer): void
     {
@@ -75,14 +75,13 @@ class ProductFAQEntity extends Entity
         $this->active = $active;
     }
 
-    public function getProduct(): ProductEntity
+    public function getProduct(): ?ProductEntity
     {
         return $this->productId;
     }
 
-    public function setProduct(ProductEntity $productId): void
+    public function setProduct(?ProductEntity $productId): void
     {
         $this->productId = $productId;
     }
-
 }
