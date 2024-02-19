@@ -1,5 +1,29 @@
-<template #smart-bar-header>
-    <h2>
-      Hello from Template
-    </h2>
+<sw-page class="faq-bundle-detail">
+<template #smart-bar-actions>
+    <sw-button :routerLink="{name: 'faq.bundle.index'}">
+        TODO: BACK
+    </sw-button>
+
+    <sw-button-process
+        :isLoading="isLoading"
+        :processSuccess="processSuccess"
+        variant="primary"
+        @process-finish="saveFinish"
+        @click="onClickSave">
+
+        TODO : Save
+    </sw-button-process>
+
 </template>
+
+<template #content>
+        <sw-card-view>
+            <sw-card v-if="bundle" :isLoading="isLoading">
+                <sw-field v-model="bundle.question" :label="TODO: question Label"></sw-field>
+                <sw-field v-model="bundle.answer" :label="TODO: answer Label"></sw-field>
+            </sw-card>
+        </sw-card-view>
+
+</template>
+
+</sw-page>

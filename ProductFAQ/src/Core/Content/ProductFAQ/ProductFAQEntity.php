@@ -31,9 +31,9 @@ class ProductFAQEntity extends Entity
     protected int $orderPosition;
 
     /**
-     * @var ProductEntity|null
+     * @var ProductEntity[]|null
      */
-    protected ?ProductEntity $productId;
+    protected ?array $productQuestionAssociations;
 
     public function getOrderPosition(): int
     {
@@ -75,15 +75,19 @@ class ProductFAQEntity extends Entity
         $this->active = $active;
     }
 
-    public function getProductId(): ?ProductEntity
+    /**
+     * @return ProductEntity[]|null
+     */
+    public function getProductQuestionAssociations(): ?array
     {
-        return $this->productId;
+        return $this->productQuestionAssociations;
     }
 
-    public function setProductId(?ProductEntity $productId): void
+    /**
+     * @param ProductEntity[]|null $productQuestionAssociations
+     */
+    public function setProductQuestionAssociations(?array $productQuestionAssociations): void
     {
-        $this->productId = $productId;
+        $this->productQuestionAssociations = $productQuestionAssociations;
     }
-
-
 }

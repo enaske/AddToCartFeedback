@@ -42,11 +42,10 @@ Component.register('faq-bundle-list', {
         createdComponent() {
             this.repository = this.repositoryFactory.create("faq");
             const criteria = new Criteria();
-            criteria.addAssociation('products_all');
+            criteria.addAssociation('productQuestionAssociations.product');
             this.repository.search(criteria, Shopware.Context.api).then((result) => {
                this.bundles = result;
                console.dir(this.bundles)
-
             })
         },
         search() {
@@ -83,9 +82,15 @@ Component.register('faq-bundle-list', {
                     allowResize: true
                 },
                 {
-                    property: 'productId.productNumber',
-                    label: this.$tc('faq-bundle.columns.product'),
-                    allowResize: true
+                    property: 'productQuestionAssociations',
+                    label: this.$tc('faq-bundle.columns.products'),
+                    allowResize: true,
+                    rawData: true,
+                    render: (value) => {
+                        return value.map(association  => {
+                            return association.product.productNumber;
+                        }).join(', ');
+                    }
                 }]
         }
 

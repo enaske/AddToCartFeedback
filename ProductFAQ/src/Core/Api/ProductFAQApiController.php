@@ -31,13 +31,19 @@ $data = json_decode($request->getContent(), true);
 
 
 
-$newFAQ = [
-'id' => UUID::randomHex(),
-'active' => false,
-'question' => $data['question'],
-'orderPosition' => $data['order_position'] ?? 1,
-'productId' => $data['product_id'],
-];
+    $newFAQ = [
+        'id' => Uuid::randomHex(),
+        'active' => false,
+        'question' => $data['question'],
+        'answer' => $data['answer'] ?? null,
+        'orderPosition' => $data['order_position'] ?? 1,
+        'productQuestionAssociations' => [
+            [
+                'id' => Uuid::randomHex(),
+                'productId' => $data['product_id'],
+            ],
+        ],
+    ];
 
 
 

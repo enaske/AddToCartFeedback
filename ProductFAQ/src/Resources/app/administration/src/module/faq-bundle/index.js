@@ -1,5 +1,5 @@
 import './page/faq-bundle-list'
-
+import './page/faq-bundle-detail'
 
 import deDE from './snippet/en-GB.json'
 import enGB from './snippet/de-DE.json'
@@ -26,6 +26,13 @@ Shopware.Module.register('faq-bundle', {
         index: {
             component: 'faq-bundle-list',
             path: 'index'
+        },
+        detail: {
+            component: 'faq-bundle-detail',
+            path: 'detail/:id',
+            meta: {
+                parentPath: 'faq.bundle.index'
+            }
         }
     },
     navigation: [{

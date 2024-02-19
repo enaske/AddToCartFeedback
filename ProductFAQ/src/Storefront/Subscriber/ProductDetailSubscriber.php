@@ -73,7 +73,8 @@ class ProductDetailSubscriber implements EventSubscriberInterface
     {
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('active', 1));
-        $criteria->addFilter(new EqualsFilter('productId', $productId));
+        $criteria->addAssociation('productQuestionAssociations.product'); // Ensure product association is fetched
+        $criteria->addFilter(new EqualsFilter('productQuestionAssociations.product.id', $productId));
         // Fetch FAQs
         $FAQCollection = $this->productFAQRepository->search($criteria, $context)->getEntities();
 
