@@ -23,6 +23,7 @@ $this->faqRoleCreator = $faqRoleCreator;
 protected function configure()
 {
 $this->setName('product_faq:activate');
+
 }
 
 protected function execute(InputInterface $input, OutputInterface $output)

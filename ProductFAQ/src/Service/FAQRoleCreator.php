@@ -75,7 +75,7 @@ class FAQRoleCreator
             // Define data for the new FAQ role
             $faqRoleData = [
                 'name' => 'faq',
-                'privileges' => ['faq:create'], // Adjust this based on your actual privileges
+                'privileges' => ['faq:create', 'faq:update', 'faq:read','faq:delete','product_question_association:create', 'product_question_association:update', 'product_question_association:read','product_question_association:delete'], // Adjust this based on your actual privileges
             ];
 
             // Insert the new FAQ role without the user context

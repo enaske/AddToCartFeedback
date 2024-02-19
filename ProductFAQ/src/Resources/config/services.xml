@@ -16,11 +16,12 @@
 
         <service id="ProductFAQ\Storefront\Subscriber\ProductDetailSubscriber">
             <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service"/>
-            <argument id="faq.repository" type="service"/>
+            <argument id="product_question_association.repository" type="service"/>
             <tag name="kernel.event_subscriber"/>
         </service>
             <service id="ProductFAQ\Core\Api\ProductFAQApiController" public="true">
             <argument id="faq.repository" type="service"/>
+                <argument id="product_question_association.repository" type="service"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>

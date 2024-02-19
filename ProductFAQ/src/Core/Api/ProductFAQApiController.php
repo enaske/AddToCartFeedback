@@ -2,12 +2,12 @@
 
 namespace ProductFAQ\Core\Api;
 
+use Symfony\Component\HttpFoundation\Request;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -29,20 +29,20 @@ public function createFAQ(Request $request,Context $context): JsonResponse
 {
 $data = json_decode($request->getContent(), true);
 
-
+$questionId = Uuid::randomHex();
 
     $newFAQ = [
-        'id' => Uuid::randomHex(),
+        'id' => $questionId,
         'active' => false,
         'question' => $data['question'],
-        'answer' => $data['answer'] ?? null,
-        'orderPosition' => $data['order_position'] ?? 1,
+        'orderPosition' => 1,
         'productQuestionAssociations' => [
             [
                 'id' => Uuid::randomHex(),
-                'productId' => $data['product_id'],
-            ],
-        ],
+                'questionId' => $questionId,
+                'productId' => $data['product_id']
+            ]
+        ]
     ];
 
 

@@ -3,30 +3,30 @@
 namespace ProductFAQ\Storefront\Subscriber;
 
 use ProductFAQ\Core\Content\ProductFAQ\ProductFAQCollection;
+use ProductFAQ\Core\Content\ProductQuestionAssociation\ProductQuestionAssociationCollection;
 use ProductFAQ\Core\Content\ProductFAQ\ProductFAQEntity;
 use Shopware\Core\Framework\Context;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
-use Shopware\Storefront\Pagelet\Footer\FooterPageletLoadedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProductDetailSubscriber implements EventSubscriberInterface
 
 {
     private $systemConfigService;
-    private $productFAQRepository;
-
+    private $productQuestionsRepository;
     public function __construct(
         SystemConfigService $systemConfigService,
-        EntityRepository $productFAQRepository,
+        EntityRepository $productQuestionsRepository,
 
     ) {
-        $this->productFAQRepository = $productFAQRepository;
         $this->systemConfigService = $systemConfigService;
+        $this->productQuestionsRepository = $productQuestionsRepository;
 
     }
     public static function getSubscribedEvents()
@@ -62,24 +62,29 @@ class ProductDetailSubscriber implements EventSubscriberInterface
 
         $product = $event->getPage()->getProduct();
         $productId = $product->getUniqueIdentifier();
+        $questions = $this->fetchQuestions($event->getContext(), $productId);
 
-        $faqs = $this->fetchFAQs($event->getContext(), $productId);
-        $event->getPage()->addExtension('product_faq', $faqs
+
+        $event->getPage()->addExtension('product_questions', $questions
         );
 
     }
 
-    private function fetchFAQs(Context $context, $productId) :ProductFAQCollection
+
+    private function fetchQuestions(Context $context, $productId): ProductQuestionAssociationCollection
     {
         $criteria = new Criteria();
-        $criteria->addFilter(new EqualsFilter('active', 1));
-        $criteria->addAssociation('productQuestionAssociations.product'); // Ensure product association is fetched
-        $criteria->addFilter(new EqualsFilter('productQuestionAssociations.product.id', $productId));
-        // Fetch FAQs
-        $FAQCollection = $this->productFAQRepository->search($criteria, $context)->getEntities();
 
-        return $FAQCollection;
+        $criteria->addAssociation('product');
+        $criteria->addAssociation('faq');
+        $criteria->addFilter(new EqualsFilter('faq.active', 1));
+        $criteria->addFilter(new EqualsFilter('product.id', $productId));
+        // Fetch FAQs
+        $questionCollection = $this->productQuestionsRepository->search($criteria, $context)->getEntities();
+
+        return $questionCollection;
     }
+
 
 
 

@@ -2,6 +2,7 @@
 
 namespace ProductFAQ\Core\Content\ProductQuestionAssociation;
 
+use Shopware\Core\Content\Product\ProductEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 
@@ -12,12 +13,12 @@ class ProductQuestionAssociationEntity extends Entity
     /**
      * @var string
      */
-    protected $questionId;
+    protected string $questionId;
 
     /**
-     * @var string
+     * @var ProductEntity|null
      */
-    protected $productId;
+    protected ?ProductEntity $productId;
     public function getQuestionId(): string
     {
         return $this->questionId;
@@ -28,12 +29,12 @@ class ProductQuestionAssociationEntity extends Entity
         $this->questionId = $questionId;
     }
 
-    public function getProductId(): string
+    public function getProductId(): ?ProductEntity
     {
         return $this->productId;
     }
 
-    public function setProductId(string $productId): void
+    public function setProductId(?ProductEntity $productId): void
     {
         $this->productId = $productId;
     }

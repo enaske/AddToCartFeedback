@@ -4,16 +4,17 @@
 </button>
 
 <div class="accordion" id="faqAccordion">
-    {% for faqObj in product_faq.elements %}
+
+    {% for faqObj in product_questions.elements %}
         <div class="accordion-item">
             <h2 class="accordion-header" id="heading{{ loop.index }}">
                 <button class="accordion-button {% if not loop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="{{ loop.first ? 'true' : 'false' }}" aria-controls="collapse{{ loop.index }}">
-                    {{ faqObj.question }}
+                    {{ faqObj.faq.question }}
                 </button>
             </h2>
             <div id="collapse{{ loop.index }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    {{ faqObj.answer }}
+                    {{ faqObj.faq.answer }}
                 </div>
             </div>
         </div>

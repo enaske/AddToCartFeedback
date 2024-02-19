@@ -22,12 +22,13 @@
          </li>
     {% endblock %}
     {% block page_product_detail_tabs_content_description %}
+        {{ dump(page.extensions) }}
           {{ parent() }}
           <div class="tab-pane fade show"
                id="faq-tab-pane"
                role="tabpanel"
                aria-labelledby="faq-tab">
 
-              {% sw_include '@ProductFAQ/storefront/page/product-detail/faq.html.twig'  with { 'product_faq' : page.extensions.product_faq} %}
+              {% sw_include '@ProductFAQ/storefront/page/product-detail/faq.html.twig'  with { 'product_questions' : page.extensions.product_questions} %}
           </div>
     {% endblock %}

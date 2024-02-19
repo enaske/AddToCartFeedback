@@ -36,11 +36,11 @@ class ProductFAQDefinition extends EntityDefinition
         return new FieldCollection(
             [
                 (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required()),
-                new BoolField('active','active'),
+                new BoolField('active', 'active'),
                 (new StringField('question', 'question'))->addFlags(new Required()),
                 new StringField('answer', 'answer'),
                 new IntField('order_position', 'orderPosition'),
-                 (new OneToManyAssociationField('productQuestionAssociations', ProductQuestionAssociationDefinition::class, 'question_id'))->addFlags(new CascadeDelete()),
+                (new OneToManyAssociationField('productQuestionAssociations', ProductQuestionAssociationDefinition::class, 'id'))->addFlags(new CascadeDelete()),
 
             ]
         );
